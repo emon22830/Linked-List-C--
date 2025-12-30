@@ -1,7 +1,7 @@
 // Test 2 - SECJ2013 - 24251 (Test2-1cs.cpp)
-// Name: ???
-// Matric No.: ???
-// Section: ???
+// Name: MD EMON
+// Matric No.: A24CS4023
+// Section: 2
 
 #include <iostream>
 #include <string>
@@ -64,31 +64,76 @@ class DoublyLinkedList {
 
         // Task 1: Display the list in forward order
         void displayForward() {
+            CarSale* curr = head;
+            while (curr !=NULL) {
+                curr->printSaleInfo();
+                curr = curr->next;
+            }
 
         }
 
         // Task 2: Display the list in backward order
         void displayBackward() {
+            CarSale *curr = tail;
+
+            while( curr != NULL) {
+                curr->printSaleInfo();
+                curr = curr->prev;
+            }
 
         }
 
         // Task 3: Add car sale "Hilux" between "Saga" and "Vios"
         void addBetween() {
+            CarSale* newCarsSale = new CarSale("Hilux", "TOYOTA", 11540);
+            CarSale* vios = head->next;
+
+            head->next = newCarsSale;
+            newCarsSale->prev = head;
+
+            newCarsSale->next = vios;
+            vios->prev = newCarsSale;
 
         }
 
         // Task 4: Delete the last node from the list
         void deleteLast() {
+            CarSale* temp = tail;
+            tail = tail->prev;  
+            tail->next = nullptr;
+            delete temp;
 
         }
 
         // Task 5: Delete and replace first node with "Bezza"
         void replaceFirst() {
+            CarSale* newCarSale = new CarSale("Bezza", "PERODUA", 8963);
+            CarSale* temp = head;
+
+            newCarSale->next = head->next;
+            head->next->prev = newCarSale;
+            head = newCarSale;
+
+            delete temp;
 
         }
 
         // Task 6: Display forward, delete and total up unit sales
         void displayAndTotal() {
+            float totalUnitSales = 0;
+            CarSale* curr = head;
+
+            while(curr){
+                CarSale* temp = curr;
+                curr = curr->next;
+
+                temp->printSaleInfo();
+                totalUnitSales += temp->unitSale;
+                delete temp;
+            }
+
+            head = NULL; tail = NULL;
+            cout <<"\n TOTAL SALE =" <<totalUnitSales << " units\n";
         
         }
 

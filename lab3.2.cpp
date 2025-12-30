@@ -44,23 +44,48 @@ class Stack {
 
         // Task 1: Complete the createStack() function
         void createStack() {
+            top = -1;
 
         }
 
         // Task 2: Complete the push() function
         void push(Cylinder cl) {
+            if(isFull()){
+                cout << "Stack is full. Cannot push Cylinder " << cl.getID() << "\n";
+                       
+            }
+            else{
+                cout<< "Push Cylinder " << cl.getID() << " onto stack.\n";
+                top++;
+                data[top] = cl;
+            }
 
         }
 
         // Task 3: Complete the pop() function
         void pop() {
+            if(isEmpty()){
+                cout << "Stack is empty. Cannot pop Cylinder.\n";
+
+            }
+            else{
+                Cylinder topItem = stackTop();
+                top--;
+                cout << "Pop Cylinder " << topItem.getID() << " from stack.\n";
+            }
 
         }
 
         // Task 4: Modify the stackTop(), isEmpty(), and isFull() functions
-        Cylinder stackTop() { return Cylinder("CL0000", 0, 0); }
-        bool isEmpty() {  return true; }
-        bool isFull() {  return false; }
+        Cylinder stackTop() { 
+            return data[top];
+        }
+        bool isEmpty() {
+              return (top == -1 );
+             }
+        bool isFull() {
+              return (top == STACK_SIZE - 1 );
+             }
 
         void checkContent() {
             cout << "Current stack content:\n";
@@ -109,7 +134,7 @@ int main() {
     cout << "Pop stack until Cylinder 'CL4399' becomes the top and \n";
     cout << "then push Cylinder 'CL4350' onto the stack... \n";
 
-    // Task 5:
+// Task 5:
     // pop cylinder objects using 'while' loop until 
     // Cylinder 'CL4399' becomes the top
     // ???
@@ -118,6 +143,24 @@ int main() {
 
     // push Cylinder 'CL4350' onto stack
     // ???
+    while(cylinderStack.stackTop().getID() != "CL4399") {
+        cylinderStack.pop();
+    }
+
+    cylinderStack.push( cylinders[5] ); // Push Cylinder 'CL4350'
+    cout << "\n";
+
+    cout << "pop all cylinders from stack:\n";
+    while (!cylinderStack.isEmpty()) {
+        cylinderStack.pop();
+    }
+
+    cout << "\nTry to pop Cylinder even stack is empty:\n";
+    cylinderStack.pop();
+    return 0;
+
+
+
     
 
     cylinderStack.checkContent();
